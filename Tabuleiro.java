@@ -9,7 +9,7 @@ public class Tabuleiro {
     public static void main(String[] args) {
         List<JogadorGeral> jogadores = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        boolean debugMode = true;//  Ative ou desative o modo Debug aqui
+        boolean debugMode = true;
 
         jogadores.add(new JogadorNormal("Azul"));
         jogadores.add(new JogadorNormal("Verde"));
@@ -80,7 +80,6 @@ public class Tabuleiro {
                         }
                     }
 
-                    // Casas que fazem outro jogador voltar para o início
                     if (jogador.posicao == 17 || jogador.posicao == 27) {
                         System.out.println(jogador.cor + " caiu na casa " + jogador.posicao
                                 + "! Vai escolher um jogador para voltar ao início.");
@@ -93,20 +92,17 @@ public class Tabuleiro {
                                  jogador.cor + " escolheu " + escolhido.cor + " para voltar ao início!");
                     }
 
-                    // Casas que pulam a próxima rodada
                     if (jogador.posicao == 10 || jogador.posicao == 25 || jogador.posicao == 38) {
                         System.out.println(jogador.cor + " caiu numa casa que perde a próxima rodada!");
                         jogador.devePularProximaRodada = true;
                     }
 
-                    // Casas da sorte
                     if ((jogador.posicao == 5 || jogador.posicao == 15 || jogador.posicao == 30) &&
                             !(jogador instanceof JogadorAzarado)) {
                         jogador.posicao += 3;
                         System.out.println(jogador.cor + " caiu em uma CASA DA SORTE e andou mais 3 casas!");
                     }
 
-                    // Casa 13 - muda de tipo
                     if (jogador.posicao == 13) {
                         System.out.println(jogador.cor + " caiu na casa 13! Vai tirar uma carta surpresa...");
                         int tipoSorteado = (int) (Math.random() * 3);
@@ -131,7 +127,6 @@ public class Tabuleiro {
                         jogador = novoJogador;
                     }
 
-                    // Verifica vitória
                     if (jogador.posicao >= 40) {
                         System.out.println("VENCEDOR: " + jogador.cor + "!");
                         jogoAtivo = false;
@@ -140,21 +135,14 @@ public class Tabuleiro {
                 }
             }
 
-            // Mostrar posição de todos os jogadores
             System.out.println("\n== POSIÇÃO ATUAL DOS JOGADORES ==");
             for (JogadorGeral jogador : jogadores) {
                 System.out.println(jogador.cor + " está na casa " + jogador.posicao);
             }
-            System.out.println("----------------------------------\n");
+            System.out.println("----------------------------------\n");            
 
-            try {
-                Thread.sleep(1000); // pausa para legibilidade
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
 
-        // Mostrar resumo final
         System.out.println("\n== RESUMO FINAL ==");
         for (JogadorGeral jogador : jogadores) {
             System.out.println(jogador.cor + ": " + jogador.jogadas + " jogadas | casa final: " + jogador.posicao);
