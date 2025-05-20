@@ -5,9 +5,10 @@ public class JogadorSortudo extends JogadorGeral{
         super(cor);
     }
 
-    public int[] JogarDados(){
-        int dado1 = (int) (Math.random() *6) +1;
-        int dado2 = (int) (Math.random() *6) +1;
-        return new int[]{dado1, dado2};
-    }
+public int[] JogarDados() {
+    int dado1 = (int)(Math.random() * 3) + 4;
+    int dado2 = (int)(Math.random() * 3) + 4;
+    return new int[]{dado1, dado2};
+}
+
 }
